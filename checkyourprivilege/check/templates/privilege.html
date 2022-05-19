@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Check your Privilege!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+        }
+        .check-it {
+            transform: scale(6);
+        }
+        .check-it {
+            display:block;
+        }
+        .main {
+            display:flex;
+            justify-content: center;
+            align-content: center;
+        }
+        #content {
+            display:flex;
+            justify-content: space-evenly;
+            align-content: center;
+            flex-direction:column;
+            height:100%;
+        }
+        h1 {
+            text-align:center;
+        }
+        .count {
+            text-align:center;
+            font-style:italic;
+        }
+    </style>
+    <script>
+        const localStorage = window.localStorage;
+        const exists = {% if priv %} true {% else %} false {% endif %};
+        var privKey;
+
+        if (exists) {
+            privKey = '{{ priv.privilege_owner }}';
+            localStorage.setItem('privilegeKey', privKey);
+        } else {
+            privKey = localStorage.getItem('privilegeKey');
+        }
+
+        const path = window.location.pathname;
+        if ( privKey && privKey !== "" && path === "/" ) {
+            window.location.pathname = "/" + privKey;
+            console.log("updating pathanem")
+        }
+    </script>
+</head>
+
+<body>
+    <div id="content">
+        <div class="main">
+            <div class="check-it">
+                <form role="form" action="" method="post">
+                    {% csrf_token %}
+                    <input type="checkbox" id="check" value="check" onChange="submit()" {% if priv and priv.checked_today %}checked disabled{% endif %}/><label>Privilege</label>
+                </form>
+            </div>
+        </div>
+        {% if priv %}
+        <div class="count">you checked your privilege <b>{{priv.check_count}}</b> times already </div>
+        {% endif %}
+    </div>
+    <footer>
+
+    </footer>
+</body>
+</html>
