@@ -40,6 +40,40 @@
             text-align:center;
             font-style:italic;
         }
+        .error {
+            display:block;
+            position:fixed;
+            top:1rem;
+            left:1rem;
+            color:white;
+            background-color:#ff376a;
+            padding: 0.5rem 1.25rem;
+            border-radius:7px;
+            animation: slidein 0.4s ease-in-out;
+            transition: opacity 0.3s;
+        }
+        .error:hover {
+            cursor: pointer;
+        }
+        .error > h2 {
+            margin-bottom:0.25rem;
+            margin-top:0.25rem;
+        }
+        @keyframes slidein {
+            0% {
+              transform: translateX(-100%);
+            }
+          
+            80% {
+              transform:translateX(7%);
+            }
+            96% {
+              transform: translateX(-2%);
+            }
+            100% {
+              transform: translateX(0);
+            }
+          }
     </style>
     <script>
         const localStorage = window.localStorage;
@@ -67,16 +101,30 @@
             <div class="check-it">
                 <form role="form" action="" method="post">
                     {% csrf_token %}
-                    <input type="checkbox" id="check" value="check" onChange="submit()" {% if priv and priv.checked_today %}checked disabled{% endif %}/><label>Privilege</label>
+                    <input type="checkbox" id="check" value="check" onChange="submit()" {% if priv and priv.checked_today %}checked{% endif %}/><label>Privilege</label>
                 </form>
             </div>
         </div>
         {% if priv %}
         <div class="count">you checked your privilege <b>{{priv.check_count}}</b> times already </div>
         {% endif %}
+        {% if noUpdate %}
+        <div class="error">
+            <h2> Nuh Uh</h2>
+            <p>Sorry but you <b>cannot</b> uncheck your privilege!</p>
+        </div>
+        {% endif %}
+
     </div>
     <footer>
-
     </footer>
+    <script defer>
+        var errors = document.getElementsByClassName("error")
+        Array.from(errors).forEach(function(error) {
+            error.addEventListener("click", function() {
+                error.style.opacity = 0;
+            })
+        });
+    </script>
 </body>
 </html>

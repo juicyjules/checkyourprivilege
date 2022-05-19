@@ -23,5 +23,6 @@ def check_your_privilege(req, p_id):
         if privilege.check_privilege():
             privilege.save()
         else:
+            req.stats = 403
             return render(req, "privilege.html", {"priv": privilege, "noUpdate":True})
     return render(req, "privilege.html", {"priv": privilege, "noUpdate":False})
