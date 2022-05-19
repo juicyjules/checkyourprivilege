@@ -1,0 +1,20 @@
+[Unit]
+Description = Check your Privilege - A Service to check your Privilege (once a day only)
+After = network.target
+
+[Service]
+PermissionsStartOnly = true
+PIDFile = /run/checkprivilege/checkprivilege.pid
+User = www-data
+Group = www-data
+WorkingDirectory = /var/www/checkyourprivilege/checkyourprivilege              
+ExecStartPre = /bin/mkdir /run/checkprivilege
+ExecStartPre = /bin/chown -R www-data:www-data /run/checkprivilege
+ExecStart = /usr/bin/env gunicorn checkyourprivilege.wsgi:application --bind 0.0.0.0:8000 --reload
+ExecReload = /bin/kill -s HUP $MAINPID
+ExecStop = /bin/kill -s TERM $MAINPID
+ExecStopPost = /bin/rm -rf /run/checkprivilege
+PrivateTmp = true
+
+[Install]
+WantedBy = multi-user.target
