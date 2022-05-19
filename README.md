@@ -7,6 +7,7 @@ This is a Service that allows you to check your privilege once a day.
 2. Execute `pip install -r requirements.txt`
 3. Apply migrations `python manage.py migrate` (maybe you need to do more IDK)
 3. Create a superuser `python manage.py createsuperuser` (you don't need to, but maybe you should...)
+3. Change AllowedHosts, SecretKey and Debug in `settings.py`. Maybe even more - you also might want to think about running a proper Database and switch off sqlite3.
 3. Copy `checkyourprivilege.service` into your systemd directory.
 4. Enable it with `systemctl enable checkyourprivilege.service` (ensure the proper directories and user permissions!)
 5. Check your Privilege! (once a day)
