@@ -90,7 +90,6 @@
         const path = window.location.pathname;
         if ( privKey && privKey !== "" && path === "/" ) {
             window.location.pathname = "/" + privKey;
-            console.log("updating pathanem")
         }
     </script>
 </head>
@@ -111,7 +110,7 @@
         {% if noUpdate %}
         <div class="error">
             <h2> Nuh Uh</h2>
-            <p>Sorry but you <b>cannot</b> uncheck your privilege!</p>
+            <p>Sorry but you cannot <b>uncheck</b> your privilege!</p>
         </div>
         {% endif %}
 
