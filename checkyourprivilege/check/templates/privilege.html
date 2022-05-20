@@ -4,8 +4,12 @@
     <title>Check your Privilege!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             margin: 0;
+            padding:1rem;
             height: 100vh;
         }
         @media only screen and (max-width: 600px) {
@@ -13,9 +17,19 @@
                 transform: scale(4);
             }
         }
-        @media only screen and (min-width: 601px) {
+        @media only screen and (min-width: 601px) and (max-width: 1100px){
+            .check-it {
+                transform: scale(5);
+            }
+        }
+        @media only screen and (min-width: 1101px) and (max-width:1600px) {
             .check-it {
                 transform: scale(6);
+            }
+        }
+        @media only screen and (min-width: 1601px) {
+            .check-it {
+                transform: scale(7);
             }
         }
         .check-it {
