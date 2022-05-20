@@ -105,7 +105,7 @@
             </div>
         </div>
         {% if priv %}
-        <div class="count">you checked your privilege <b>{{priv.check_count}}</b> times already </div>
+        <div class="count">you checked your privilege <b>{{priv.check_count}}</b> {% if priv.check_count != 1%}times{% else %}time{% endif %} already </div>
         {% endif %}
         {% if noUpdate %}
         <div class="error">

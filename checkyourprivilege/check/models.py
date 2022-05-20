@@ -15,12 +15,10 @@ class Privilege(models.Model):
         return datetime.datetime.today().date() == self.updated_at.date()
 
     def check_privilege(self):
-        print("updating bitch") 
         print(datetime.datetime.today().date())
         print(self.updated_at.date())
         if not self.checked_today():
             self.check_count += 1
-            print("UPDATED BITCH")
             return True
         return False
     
